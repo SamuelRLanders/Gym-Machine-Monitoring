@@ -1,0 +1,14 @@
+# ESP-IDF build output
+firmware/build/
+firmware/managed_components/
+firmware/dependencies.lock
+
+# Generated config (sdkconfig.defaults is committed instead)
+firmware/sdkconfig
+firmware/sdkconfig.old
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

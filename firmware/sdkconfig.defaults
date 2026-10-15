@@ -1,0 +1,6 @@
+# Committed config overrides. Regenerate sdkconfig with `idf.py fullclean`
+# or delete sdkconfig after changing these.
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+
+# ESP-WROOM-32 module has 4 MB flash (IDF assumes 2 MB otherwise)
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y

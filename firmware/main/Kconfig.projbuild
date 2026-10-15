@@ -1,0 +1,59 @@
+# Project-specific options. These show up in `idf.py menuconfig` (or the
+# ESP-IDF extension's SDK Configuration Editor) under "Gym Machine Monitor".
+# Values are saved in sdkconfig, which is git-ignored, so the Wi-Fi password
+# never ends up in the repository.
+
+menu "Gym Machine Monitor"
+
+    config GYM_WIFI_SSID
+        string "Wi-Fi network name (SSID)"
+        default ""
+        help
+            Name of the 2.4 GHz Wi-Fi network to join.
+
+    config GYM_WIFI_PASSWORD
+        string "Wi-Fi password"
+        default ""
+        help
+            Password for the network above. Leave empty for an open network.
+
+    config GYM_SERVER_URL
+        string "Server URL"
+        default "http://192.168.1.50:8000/status"
+        help
+            Full URL the ESP32 POSTs status messages to. Use the server
+            computer's LAN IP address (from ipconfig), not localhost.
+
+    config GYM_MACHINE_ID
+        string "Machine ID"
+        default "machine-1"
+        help
+            Name sent with every message so the server knows which machine
+            the reading came from.
+
+    config GYM_MOTION_THRESHOLD_MV
+        int "Motion threshold (millivolts)"
+        range 50 3000
+        default 1300
+        help
+            Sensor voltage above this counts as motion. The sensor outputs
+            0 V when idle and about 2.6 V when triggered, so 1300 mV sits
+            halfway between.
+
+    config GYM_REPORT_PERIOD_MS
+        int "Report window (milliseconds)"
+        range 1000 600000
+        default 5000
+        help
+            Length of each observation window. At the end of every window
+            the ESP32 sends "occupied" if any motion was seen, else "free".
+
+    config GYM_SAMPLE_PERIOD_MS
+        int "Sample interval (milliseconds)"
+        range 10 5000
+        default 100
+        help
+            How often the sensor is read during a window. Shorter catches
+            briefer motion.
+
+endmenu
